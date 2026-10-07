@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusAI — High-End Free Tier Q&A</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            zinc: {
+              925: '#111114',
+              950: '#09090b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Highlight.js GitHub Dark Theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- Marked.js Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex antialiased selection:bg-sky-500/30 selection:text-sky-200 overflow-hidden font-sans">
+
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
+
+  <!-- Left Sidebar (280px Desktop, Slide-out Mobile) -->
+  <aside 
+    id="sidebar" 
+    class="fixed inset-y-0 left-0 z-50 w-[280px] bg-zinc-950/90 border-r border-zinc-800/80 flex flex-col transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 md:static md:z-0 shrink-0 select-none backdrop-blur-xl"
+  >
+    <!-- Sidebar Header & Brand -->
+    <div class="p-4 border-b border-zinc-800/70 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 via-indigo-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-sky-500/20">
+          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div class="leading-tight">
+          <h1 class="text-sm font-semibold tracking-wide text-zinc-100 flex items-center gap-1.5">
+            NexusAI
+            <span class="text-[10px] font-mono uppercase bg-sky-500/20 text-sky-400 px-1.5 py-0.5 rounded border border-sky-500/30">Free</span>
+          </h1>
+          <p class="text-[11px] text-zinc-400">Zero-Cost AI Architecture</p>
+        </div>
+      </div>
+      <button id="close-sidebar-btn" type="button" class="md:hidden p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- New Chat Action Button -->
+    <div class="p-3">
+      <button 
+        id="new-chat-btn" 
+        type="button" 
+        class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-zinc-900 to-zinc-800/80 hover:from-zinc-800 hover:to-zinc-700/80 text-zinc-200 border border-zinc-700/60 shadow-sm hover:shadow-md transition-all group"
+      >
+        <div class="flex items-center gap-2.5 text-sm font-medium">
+          <svg class="w-4 h-4 text-sky-400 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+          </svg>
+          <span>New Chat</span>
+        </div>
+        <kbd class="text-[10px] font-mono bg-zinc-950/70 border border-zinc-700/60 px-1.5 py-0.5 rounded text-zinc-400">Ctrl K</kbd>
+      </button>
+    </div>
+
+    <!-- Scrollable Sessions History List -->
+    <div class="flex-1 overflow-y-auto px-2 space-y-0.5" id="sessions-list">
+      <!-- Session groups dynamically rendered by app.js -->
+    </div>
+
+    <!-- Sidebar Footer with Status Badge -->
+    <div class="p-3 border-t border-zinc-800/80 bg-zinc-950/50">
+      <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-900/60 border border-zinc-800/70">
+        <div class="flex items-center gap-2.5">
+          <span class="pulse-dot"></span>
+          <div class="text-[12px] leading-tight">
+            <div class="font-medium text-zinc-300">Gemini 3.5 Flash Lite</div>
+            <div class="text-[10px] text-zinc-400">Google Free Tier • Active</div>
+          </div>
+        </div>
+        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Live</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Chat Area -->
+  <main class="flex-1 flex flex-col h-screen overflow-hidden bg-zinc-950 relative">
+    
+    <!-- Top Sticky Header -->
+    <header class="h-14 border-b border-zinc-800/80 flex items-center justify-between px-4 sm:px-6 bg-zinc-950/80 backdrop-blur-md z-30 shrink-0">
+      <div class="flex items-center gap-3">
+        <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <h2 id="active-chat-title" class="text-sm font-medium text-zinc-200 truncate max-w-[200px] sm:max-w-md">
+          New Chat
+        </h2>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button 
+          id="clear-chat-btn" 
+          type="button" 
+          class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-850 rounded-lg border border-zinc-800 hover:border-zinc-700 transition-colors"
+          title="Clear current conversation"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+          </svg>
+          <span class="hidden sm:inline">Clear Chat</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable Messages Feed -->
+    <div id="chat-container" class="flex-1 overflow-y-auto px-4 py-6">
+      <div class="max-w-3xl mx-auto flex flex-col justify-between min-h-full">
+        
+        <!-- Empty State Welcome Splash -->
+        <div id="empty-state" class="my-auto py-12 flex flex-col items-center text-center">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-500 flex items-center justify-center shadow-xl shadow-sky-500/25 mb-4">
+            <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight mb-2">
+            What can I help you discover today?
+          </h3>
+          <p class="text-sm text-zinc-400 max-w-md mb-8">
+            Experience ultra-fast, zero-cost AI intelligence powered by Google Gemini Free Tier with real-time token streaming.
+          </p>
+
+          <!-- Starter Prompt Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-xl text-left">
+            <button 
+              type="button" 
+              class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
+              data-prompt="Explain quantum computing principles with a simple real-world analogy."
+            >
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Explain quantum computing</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">With a simple real-world analogy</div>
+            </button>
+
+            <button 
+              type="button" 
+              class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
+              data-prompt="Write a production-ready Python FastAPI script that handles async SQLite database connections."
+            >
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">FastAPI + SQLite sample</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">Production-ready asynchronous code snippet</div>
+            </button>
+
+            <button 
+              type="button" 
+              class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
+              data-prompt="Analyze the trade-offs between monolithic architecture versus microservices for an early-stage startup."
+            >
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Architecture trade-offs</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">Monolith vs Microservices for startups</div>
+            </button>
+
+            <button 
+              type="button" 
+              class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
+              data-prompt="Help me debug a SQL query that has slow JOIN performance on large tables."
+            >
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Optimize SQL query</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">Improve indexing and execution plan</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Chat Messages Feed -->
+        <div id="messages-feed" class="w-full space-y-4"></div>
+
+      </div>
+    </div>
+
+    <!-- Floating Sticky Bottom Input Bar -->
+    <div class="px-4 pb-4 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent shrink-0">
+      <div class="max-w-3xl mx-auto">
+        <div class="glass-input relative rounded-2xl border border-zinc-700/60 shadow-2xl focus-within:ring-2 focus-within:ring-sky-500/50 focus-within:border-sky-500 transition-all">
+          <div class="flex items-end gap-2 p-2.5">
+            
+            <!-- Dynamic Auto-resizing Textarea -->
+            <textarea
+              id="message-input"
+              rows="1"
+              placeholder="Message NexusAI... (Enter to send, Shift + Enter for newline)"
+              class="flex-1 bg-transparent border-0 resize-none text-zinc-100 placeholder-zinc-500 text-sm focus:ring-0 focus:outline-none px-2 py-1.5 max-h-44 leading-relaxed"
+            ></textarea>
+
+            <!-- Dynamic Send / Stop Action Button -->
+            <button
+              id="send-btn"
+              type="button"
+              class="w-9 h-9 rounded-xl bg-sky-500 hover:bg-sky-400 text-white flex items-center justify-center shrink-0 shadow-md transition-all active:scale-95 disabled:opacity-40"
+              title="Send message"
+            >
+              <!-- Idle Send Arrow -->
+              <svg id="send-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+
+              <!-- Active Streaming Stop Square -->
+              <svg id="stop-icon" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="6" width="12" height="12" rx="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Micro-disclaimer -->
+        <div class="mt-2 text-center text-[11px] text-zinc-500">
+          Free AI tier. Output may be subject to API rate limits. Verify critical info.
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Client Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
+
