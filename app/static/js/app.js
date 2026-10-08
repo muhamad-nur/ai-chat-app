@@ -343,11 +343,10 @@ class AIChatApp {
   appendUserMessage(text) {
     const wrapper = document.createElement("div");
     wrapper.className = "flex justify-end animate-fade-in";
-    wrapper.innerHTML = `
-      <div class="max-w-[85%] sm:max-w-[72%] w-fit rounded-2xl rounded-tr-sm bg-zinc-800/90 text-zinc-100 px-3.5 py-2 sm:px-4 sm:py-2.5 shadow-sm whitespace-pre-wrap break-words text-[0.93rem] leading-snug border border-zinc-700/60">
-        ${this.escapeHtml(text)}
-      </div>
-    `;
+    const bubble = document.createElement("div");
+    bubble.className = "user-bubble";
+    bubble.textContent = text.trim();
+    wrapper.appendChild(bubble);
     this.messagesFeed.appendChild(wrapper);
     this.scrollToBottom();
   }

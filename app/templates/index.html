@@ -58,7 +58,6 @@
           <h1 class="text-sm font-semibold tracking-wide text-zinc-100 flex items-center gap-1.5">
             NuyyAI
           </h1>
-          <p class="text-[11px] text-zinc-400">Arsitektur AI Tanpa Biaya</p>
         </div>
       </div>
       <button id="close-sidebar-btn" type="button" class="md:hidden p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800">
@@ -87,20 +86,6 @@
     <!-- Scrollable Sessions History List -->
     <div class="flex-1 overflow-y-auto px-2 space-y-0.5" id="sessions-list">
       <!-- Session groups dynamically rendered by app.js -->
-    </div>
-
-    <!-- Sidebar Footer with Status Badge (Hidden) -->
-    <div class="hidden p-3 border-t border-zinc-800/80 bg-zinc-950/50" id="model-indicator">
-      <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-900/60 border border-zinc-800/70">
-        <div class="flex items-center gap-2.5">
-          <span class="pulse-dot"></span>
-          <div class="text-[12px] leading-tight">
-            <div class="font-medium text-zinc-300">Gemini 3.5 Flash Lite</div>
-            <div class="text-[10px] text-zinc-400">Google Free Tier • Aktif</div>
-          </div>
-        </div>
-        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Aktif</span>
-      </div>
     </div>
   </aside>
 
@@ -146,12 +131,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight mb-2">
+          <h3 class="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight mb-6">
             Ada yang bisa saya bantu temukan hari ini?
           </h3>
-          <p class="text-sm text-zinc-400 max-w-md mb-6">
-            Nikmati kecerdasan AI super cepat dan tanpa biaya dengan <strong>Arsitektur AI Tanpa Biaya</strong> bertenaga Google Gemini Free Tier dengan streaming waktu nyata.
-          </p>
 
           <!-- Input Bar Slot di Tengah (Tampilan Awal) -->
           <div id="input-center-slot" class="w-full max-w-xl mx-auto mb-6"></div>
