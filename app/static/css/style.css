@@ -253,23 +253,28 @@
 }
 
 /* ========================================================
-   Mobile & Android Viewport Adjustments
+   Chat Input Bar Viewport Adjustments
    Menaikkan posisi input chat agar tidak terlalu mepet ke bawah
    ======================================================== */
+.mobile-bottom-bar {
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
 @media (max-width: 768px) {
-  /* Naikkan margin bawah container input di Android/HP */
+  /* Naikkan margin bawah container input di Android/HP agar lebih tinggi */
   .mobile-bottom-bar {
-    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem)) !important;
-    margin-bottom: 0.75rem !important;
+    padding-bottom: max(2.5rem, env(safe-area-inset-bottom, 2.5rem)) !important;
+    margin-bottom: 2rem !important;
   }
 
   .glass-input {
-    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.6) !important;
   }
 
   /* Ruang bernafas ekstra agar pesan paling bawah tidak tertutup input bar */
   #chat-container {
-    padding-bottom: 7rem !important;
+    padding-bottom: 10rem !important;
   }
 }
 

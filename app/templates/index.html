@@ -91,8 +91,8 @@
       <!-- Session groups dynamically rendered by app.js -->
     </div>
 
-    <!-- Sidebar Footer with Status Badge -->
-    <div class="p-3 border-t border-zinc-800/80 bg-zinc-950/50">
+    <!-- Sidebar Footer with Status Badge (Hidden) -->
+    <div class="hidden p-3 border-t border-zinc-800/80 bg-zinc-950/50" id="model-indicator">
       <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-900/60 border border-zinc-800/70">
         <div class="flex items-center gap-2.5">
           <span class="pulse-dot"></span>
@@ -138,7 +138,7 @@
     </header>
 
     <!-- Scrollable Messages Feed -->
-    <div id="chat-container" class="flex-1 overflow-y-auto px-4 py-6 pb-28 sm:pb-6">
+    <div id="chat-container" class="flex-1 overflow-y-auto px-4 py-6 pb-40 sm:pb-36">
       <div class="max-w-3xl mx-auto flex flex-col justify-between min-h-full">
         
         <!-- Empty State Welcome Splash -->
@@ -201,8 +201,8 @@
       </div>
     </div>
 
-    <!-- Floating Sticky Bottom Input Bar (Dinaikkan sedikit untuk tampilan mobile / Android) -->
-    <div class="mobile-bottom-bar px-4 pb-7 sm:pb-4 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent shrink-0 mb-3 sm:mb-0">
+    <!-- Floating Sticky Bottom Input Bar (Dinaikkan agar nyaman di desktop dan mobile/Android) -->
+    <div class="mobile-bottom-bar px-4 pb-10 sm:pb-8 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent shrink-0 mb-6 sm:mb-4">
       <div class="max-w-3xl mx-auto">
         <div class="glass-input relative rounded-2xl border border-zinc-700/60 shadow-2xl focus-within:ring-2 focus-within:ring-sky-500/50 focus-within:border-sky-500 transition-all">
           <div class="flex items-end gap-2 p-2.5">
@@ -211,7 +211,7 @@
             <textarea
               id="message-input"
               rows="1"
-              placeholder="Kirim pesan ke NuyyAI... (Enter untuk kirim, Shift + Enter untuk baris baru)"
+              placeholder="Kirim Pesan"
               class="flex-1 bg-transparent border-0 resize-none text-zinc-100 placeholder-zinc-500 text-sm focus:ring-0 focus:outline-none px-2 py-1.5 max-h-44 leading-relaxed"
             ></textarea>
 
