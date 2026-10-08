@@ -57,7 +57,6 @@
         <div class="leading-tight">
           <h1 class="text-sm font-semibold tracking-wide text-zinc-100 flex items-center gap-1.5">
             NuyyAI
-            <span class="text-[10px] font-mono uppercase bg-sky-500/20 text-sky-400 px-1.5 py-0.5 rounded border border-sky-500/30">Gratis</span>
           </h1>
           <p class="text-[11px] text-zinc-400">Arsitektur AI Tanpa Biaya</p>
         </div>
@@ -82,7 +81,6 @@
           </svg>
           <span>Obrolan Baru</span>
         </div>
-        <kbd class="text-[10px] font-mono bg-zinc-950/70 border border-zinc-700/60 px-1.5 py-0.5 rounded text-zinc-400">Ctrl K</kbd>
       </button>
     </div>
 
@@ -151,9 +149,12 @@
           <h3 class="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight mb-2">
             Ada yang bisa saya bantu temukan hari ini?
           </h3>
-          <p class="text-sm text-zinc-400 max-w-md mb-8">
+          <p class="text-sm text-zinc-400 max-w-md mb-6">
             Nikmati kecerdasan AI super cepat dan tanpa biaya dengan <strong>Arsitektur AI Tanpa Biaya</strong> bertenaga Google Gemini Free Tier dengan streaming waktu nyata.
           </p>
+
+          <!-- Input Bar Slot di Tengah (Tampilan Awal) -->
+          <div id="input-center-slot" class="w-full max-w-xl mx-auto mb-6"></div>
 
           <!-- Starter Prompt Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-xl text-left">
@@ -196,14 +197,14 @@
         </div>
 
         <!-- Dynamic Chat Messages Feed -->
-        <div id="messages-feed" class="w-full space-y-4"></div>
+        <div id="messages-feed" class="w-full space-y-3.5"></div>
 
       </div>
     </div>
 
-    <!-- Floating Sticky Bottom Input Bar (Dinaikkan agar nyaman di desktop dan mobile/Android) -->
-    <div class="mobile-bottom-bar px-4 pb-10 sm:pb-8 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent shrink-0 mb-6 sm:mb-4">
-      <div class="max-w-3xl mx-auto">
+    <!-- Floating Sticky Bottom Input Bar Slot -->
+    <div id="input-bottom-slot" class="mobile-bottom-bar px-4 pb-10 sm:pb-8 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent shrink-0 mb-6 sm:mb-4">
+      <div id="input-container" class="max-w-3xl mx-auto">
         <div class="glass-input relative rounded-2xl border border-zinc-700/60 shadow-2xl focus-within:ring-2 focus-within:ring-sky-500/50 focus-within:border-sky-500 transition-all">
           <div class="flex items-end gap-2 p-2.5">
             
@@ -233,11 +234,6 @@
               </svg>
             </button>
           </div>
-        </div>
-
-        <!-- Micro-disclaimer -->
-        <div class="mt-2 text-center text-[11px] text-zinc-500 pb-1 sm:pb-0">
-          Layanan AI gratis. Respons dapat terkena batas laju API. Verifikasi informasi penting.
         </div>
       </div>
     </div>

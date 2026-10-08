@@ -26,6 +26,9 @@ class AIChatApp {
     this.clearChatBtn = document.getElementById("clear-chat-btn");
     this.mobileMenuBtn = document.getElementById("mobile-menu-btn");
     this.closeSidebarBtn = document.getElementById("close-sidebar-btn");
+    this.inputContainer = document.getElementById("input-container");
+    this.inputCenterSlot = document.getElementById("input-center-slot");
+    this.inputBottomSlot = document.getElementById("input-bottom-slot");
 
     this.init();
   }
@@ -33,7 +36,23 @@ class AIChatApp {
   init() {
     this.configureMarked();
     this.bindEvents();
+    this.updateInputPosition(true);
     this.loadSessions();
+  }
+
+  updateInputPosition(isEmpty) {
+    if (!this.inputContainer || !this.inputCenterSlot || !this.inputBottomSlot) return;
+    if (isEmpty) {
+      if (!this.inputCenterSlot.contains(this.inputContainer)) {
+        this.inputCenterSlot.appendChild(this.inputContainer);
+        this.inputBottomSlot.classList.add("hidden");
+      }
+    } else {
+      if (!this.inputBottomSlot.contains(this.inputContainer)) {
+        this.inputBottomSlot.appendChild(this.inputContainer);
+        this.inputBottomSlot.classList.remove("hidden");
+      }
+    }
   }
 
   configureMarked() {
@@ -257,8 +276,10 @@ class AIChatApp {
     this.messagesFeed.innerHTML = "";
     if (messages.length === 0) {
       this.emptyState.classList.remove("hidden");
+      this.updateInputPosition(true);
     } else {
       this.emptyState.classList.add("hidden");
+      this.updateInputPosition(false);
       messages.forEach((msg) => {
         if (msg.role === "user") {
           this.appendUserMessage(msg.content);
@@ -277,6 +298,7 @@ class AIChatApp {
     this.chatTitle.textContent = "Obrolan Baru";
     this.messagesFeed.innerHTML = "";
     this.emptyState.classList.remove("hidden");
+    this.updateInputPosition(true);
     this.renderSessionsList();
     this.messageInput.value = "";
     this.autoResizeTextarea();
@@ -320,9 +342,9 @@ class AIChatApp {
 
   appendUserMessage(text) {
     const wrapper = document.createElement("div");
-    wrapper.className = "flex justify-end mb-6 animate-fade-in";
+    wrapper.className = "flex justify-end animate-fade-in";
     wrapper.innerHTML = `
-      <div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-zinc-800 text-zinc-100 px-4 py-3 shadow-md whitespace-pre-wrap break-words text-[0.95rem] leading-relaxed border border-zinc-700/50">
+      <div class="max-w-[85%] sm:max-w-[72%] w-fit rounded-2xl rounded-tr-sm bg-zinc-800/90 text-zinc-100 px-3.5 py-2 sm:px-4 sm:py-2.5 shadow-sm whitespace-pre-wrap break-words text-[0.93rem] leading-snug border border-zinc-700/60">
         ${this.escapeHtml(text)}
       </div>
     `;
@@ -332,14 +354,14 @@ class AIChatApp {
 
   createAssistantBubble() {
     const wrapper = document.createElement("div");
-    wrapper.className = "flex items-start gap-3.5 mb-6 animate-fade-in";
+    wrapper.className = "flex items-start gap-3 animate-fade-in";
     wrapper.innerHTML = `
-      <div class="shrink-0 w-8 h-8 rounded-xl bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-500 flex items-center justify-center shadow-md shadow-sky-500/10">
-        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <div class="shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-500 flex items-center justify-center shadow-md shadow-sky-500/10 mt-0.5">
+        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
         </svg>
       </div>
-      <div class="assistant-content flex-1 overflow-hidden prose-dark min-h-[32px] pt-0.5">
+      <div class="assistant-content flex-1 overflow-hidden prose-dark min-h-[28px] pt-0">
         <span class="typing-cursor"></span>
       </div>
     `;
@@ -356,6 +378,7 @@ class AIChatApp {
 
   async sendMessage(promptText) {
     this.emptyState.classList.add("hidden");
+    this.updateInputPosition(false);
     this.appendUserMessage(promptText);
 
     const assistantBubble = this.createAssistantBubble();

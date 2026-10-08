@@ -278,3 +278,21 @@
   }
 }
 
+/* ========================================================
+   Center Slot Input Styling (Tampilan Awal)
+   ======================================================== */
+#input-center-slot #input-container {
+  width: 100% !important;
+}
+
+#input-center-slot .glass-input {
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.4), 0 0 25px rgba(56, 189, 248, 0.08) !important;
+  border-color: rgba(63, 63, 70, 0.8) !important;
+  transition: all 0.25s ease-in-out;
+}
+
+#input-center-slot .glass-input:focus-within {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 10px 35px -4px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.2) !important;
+}
+
