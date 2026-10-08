@@ -16,8 +16,8 @@ Base.metadata.create_all(bind=engine)
 
 # 2. Initialize FastAPI Application
 app = FastAPI(
-    title="NexusAI — Production-Grade Free Tier Q&A",
-    description="High-performance, zero-cost AI Q&A Web App powered by Google Gemini Free Tier.",
+    title="NuyyAI — Arsitektur AI Tanpa Biaya",
+    description="Aplikasi Web Tanya Jawab AI berperforma tinggi dan tanpa biaya bertenaga Google Gemini Free Tier.",
     version="1.0.0",
 )
 
@@ -57,8 +57,8 @@ async def health_check():
     }
 
 if __name__ == "__main__":
-    print(f"🚀 Starting NexusAI on http://{settings.HOST}:{settings.PORT}")
-    print(f"🧠 AI Model Engine: {settings.MODEL_NAME}")
-    print(f"💾 Persistent Storage: {settings.DATABASE_URL}")
+    print(f"🚀 Menjalankan NuyyAI di http://{settings.HOST}:{settings.PORT}")
+    print(f"🧠 Model AI: {settings.MODEL_NAME}")
+    print(f"💾 Database Penyimpanan: {settings.DATABASE_URL}")
     uvicorn.run("run:app", host=settings.HOST, port=settings.PORT, reload=False)
 

@@ -41,7 +41,7 @@ async def stream_chat(request: ChatRequest, db: Session = Depends(get_db)):
         db.add(session)
         db.commit()
         db.refresh(session)
-    elif session.title == "New Chat":
+    elif session.title in ["New Chat", "Obrolan Baru"]:
         # Rename session if it's currently the default title
         new_title = (user_prompt[:30] + "...") if len(user_prompt) > 30 else user_prompt
         session.title = new_title.replace("\n", " ").strip()

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexusAI — High-End Free Tier Q&A</title>
+  <title>NuyyAI — Arsitektur AI Tanpa Biaya</title>
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
@@ -56,10 +56,10 @@
         </div>
         <div class="leading-tight">
           <h1 class="text-sm font-semibold tracking-wide text-zinc-100 flex items-center gap-1.5">
-            NexusAI
-            <span class="text-[10px] font-mono uppercase bg-sky-500/20 text-sky-400 px-1.5 py-0.5 rounded border border-sky-500/30">Free</span>
+            NuyyAI
+            <span class="text-[10px] font-mono uppercase bg-sky-500/20 text-sky-400 px-1.5 py-0.5 rounded border border-sky-500/30">Gratis</span>
           </h1>
-          <p class="text-[11px] text-zinc-400">Zero-Cost AI Architecture</p>
+          <p class="text-[11px] text-zinc-400">Arsitektur AI Tanpa Biaya</p>
         </div>
       </div>
       <button id="close-sidebar-btn" type="button" class="md:hidden p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800">
@@ -80,7 +80,7 @@
           <svg class="w-4 h-4 text-sky-400 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
           </svg>
-          <span>New Chat</span>
+          <span>Obrolan Baru</span>
         </div>
         <kbd class="text-[10px] font-mono bg-zinc-950/70 border border-zinc-700/60 px-1.5 py-0.5 rounded text-zinc-400">Ctrl K</kbd>
       </button>
@@ -98,10 +98,10 @@
           <span class="pulse-dot"></span>
           <div class="text-[12px] leading-tight">
             <div class="font-medium text-zinc-300">Gemini 3.5 Flash Lite</div>
-            <div class="text-[10px] text-zinc-400">Google Free Tier • Active</div>
+            <div class="text-[10px] text-zinc-400">Google Free Tier • Aktif</div>
           </div>
         </div>
-        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Live</span>
+        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Aktif</span>
       </div>
     </div>
   </aside>
@@ -118,7 +118,7 @@
           </svg>
         </button>
         <h2 id="active-chat-title" class="text-sm font-medium text-zinc-200 truncate max-w-[200px] sm:max-w-md">
-          New Chat
+          Obrolan Baru
         </h2>
       </div>
 
@@ -127,18 +127,18 @@
           id="clear-chat-btn" 
           type="button" 
           class="flex items-center gap-1.5 px-3 py-1.5 text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-850 rounded-lg border border-zinc-800 hover:border-zinc-700 transition-colors"
-          title="Clear current conversation"
+          title="Hapus percakapan saat ini"
         >
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
           </svg>
-          <span class="hidden sm:inline">Clear Chat</span>
+          <span class="hidden sm:inline">Hapus Obrolan</span>
         </button>
       </div>
     </header>
 
     <!-- Scrollable Messages Feed -->
-    <div id="chat-container" class="flex-1 overflow-y-auto px-4 py-6">
+    <div id="chat-container" class="flex-1 overflow-y-auto px-4 py-6 pb-28 sm:pb-6">
       <div class="max-w-3xl mx-auto flex flex-col justify-between min-h-full">
         
         <!-- Empty State Welcome Splash -->
@@ -149,10 +149,10 @@
             </svg>
           </div>
           <h3 class="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight mb-2">
-            What can I help you discover today?
+            Ada yang bisa saya bantu temukan hari ini?
           </h3>
           <p class="text-sm text-zinc-400 max-w-md mb-8">
-            Experience ultra-fast, zero-cost AI intelligence powered by Google Gemini Free Tier with real-time token streaming.
+            Nikmati kecerdasan AI super cepat dan tanpa biaya dengan <strong>Arsitektur AI Tanpa Biaya</strong> bertenaga Google Gemini Free Tier dengan streaming waktu nyata.
           </p>
 
           <!-- Starter Prompt Cards -->
@@ -160,37 +160,37 @@
             <button 
               type="button" 
               class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
-              data-prompt="Explain quantum computing principles with a simple real-world analogy."
+              data-prompt="Jelaskan prinsip-prinsip komputasi kuantum dengan analogi dunia nyata yang sederhana."
             >
-              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Explain quantum computing</div>
-              <div class="text-[12px] text-zinc-500 line-clamp-1">With a simple real-world analogy</div>
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Jelaskan komputasi kuantum</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">Dengan analogi dunia nyata yang sederhana</div>
             </button>
 
             <button 
               type="button" 
               class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
-              data-prompt="Write a production-ready Python FastAPI script that handles async SQLite database connections."
+              data-prompt="Tuliskan skrip Python FastAPI siap produksi yang menangani koneksi database SQLite secara asinkron."
             >
-              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">FastAPI + SQLite sample</div>
-              <div class="text-[12px] text-zinc-500 line-clamp-1">Production-ready asynchronous code snippet</div>
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Contoh FastAPI + SQLite</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">Cuplikan kode asynchronous siap pakai</div>
             </button>
 
             <button 
               type="button" 
               class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
-              data-prompt="Analyze the trade-offs between monolithic architecture versus microservices for an early-stage startup."
+              data-prompt="Analisis perbandingan kelebihan dan kekurangan arsitektur monolitik versus microservices untuk startup tahap awal."
             >
-              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Architecture trade-offs</div>
-              <div class="text-[12px] text-zinc-500 line-clamp-1">Monolith vs Microservices for startups</div>
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Perbandingan arsitektur</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">Monolith vs Microservices untuk startup</div>
             </button>
 
             <button 
               type="button" 
               class="quick-prompt-btn p-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800/80 hover:border-zinc-700 transition-all text-left group"
-              data-prompt="Help me debug a SQL query that has slow JOIN performance on large tables."
+              data-prompt="Bantu saya mengoptimalkan kueri SQL yang lambat saat melakukan operasi JOIN pada tabel berukuran besar."
             >
-              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Optimize SQL query</div>
-              <div class="text-[12px] text-zinc-500 line-clamp-1">Improve indexing and execution plan</div>
+              <div class="text-xs font-semibold text-zinc-300 group-hover:text-sky-400 transition-colors mb-1">Optimasi kueri SQL</div>
+              <div class="text-[12px] text-zinc-500 line-clamp-1">Tingkatkan indeks dan execution plan</div>
             </button>
           </div>
         </div>
@@ -201,8 +201,8 @@
       </div>
     </div>
 
-    <!-- Floating Sticky Bottom Input Bar -->
-    <div class="px-4 pb-4 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent shrink-0">
+    <!-- Floating Sticky Bottom Input Bar (Dinaikkan sedikit untuk tampilan mobile / Android) -->
+    <div class="mobile-bottom-bar px-4 pb-7 sm:pb-4 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent shrink-0 mb-3 sm:mb-0">
       <div class="max-w-3xl mx-auto">
         <div class="glass-input relative rounded-2xl border border-zinc-700/60 shadow-2xl focus-within:ring-2 focus-within:ring-sky-500/50 focus-within:border-sky-500 transition-all">
           <div class="flex items-end gap-2 p-2.5">
@@ -211,7 +211,7 @@
             <textarea
               id="message-input"
               rows="1"
-              placeholder="Message NexusAI... (Enter to send, Shift + Enter for newline)"
+              placeholder="Kirim pesan ke NuyyAI... (Enter untuk kirim, Shift + Enter untuk baris baru)"
               class="flex-1 bg-transparent border-0 resize-none text-zinc-100 placeholder-zinc-500 text-sm focus:ring-0 focus:outline-none px-2 py-1.5 max-h-44 leading-relaxed"
             ></textarea>
 
@@ -220,7 +220,7 @@
               id="send-btn"
               type="button"
               class="w-9 h-9 rounded-xl bg-sky-500 hover:bg-sky-400 text-white flex items-center justify-center shrink-0 shadow-md transition-all active:scale-95 disabled:opacity-40"
-              title="Send message"
+              title="Kirim pesan"
             >
               <!-- Idle Send Arrow -->
               <svg id="send-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -236,8 +236,8 @@
         </div>
 
         <!-- Micro-disclaimer -->
-        <div class="mt-2 text-center text-[11px] text-zinc-500">
-          Free AI tier. Output may be subject to API rate limits. Verify critical info.
+        <div class="mt-2 text-center text-[11px] text-zinc-500 pb-1 sm:pb-0">
+          Layanan AI gratis. Respons dapat terkena batas laju API. Verifikasi informasi penting.
         </div>
       </div>
     </div>

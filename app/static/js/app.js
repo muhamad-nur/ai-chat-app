@@ -143,22 +143,22 @@ class AIChatApp {
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
     const groups = {
-      Today: [],
-      Yesterday: [],
-      "Previous 7 Days": [],
-      Older: [],
+      "Hari Ini": [],
+      "Kemarin": [],
+      "7 Hari Terakhir": [],
+      "Lebih Lama": [],
     };
 
     sessions.forEach((s) => {
       const date = new Date(s.created_at);
       if (date >= today) {
-        groups.Today.push(s);
+        groups["Hari Ini"].push(s);
       } else if (date >= yesterday) {
-        groups.Yesterday.push(s);
+        groups["Kemarin"].push(s);
       } else if (date >= sevenDaysAgo) {
-        groups["Previous 7 Days"].push(s);
+        groups["7 Hari Terakhir"].push(s);
       } else {
-        groups.Older.push(s);
+        groups["Lebih Lama"].push(s);
       }
     });
 
@@ -172,7 +172,7 @@ class AIChatApp {
     if (this.sessions.length === 0) {
       this.sessionsList.innerHTML = `
         <div class="px-3 py-6 text-center text-xs text-zinc-500">
-          No previous chats yet.<br>Start a conversation!
+          Belum ada riwayat obrolan.<br>Mulai percakapan baru!
         </div>
       `;
       return;
@@ -208,7 +208,7 @@ class AIChatApp {
           <button 
             type="button" 
             class="delete-session-btn absolute right-2 opacity-0 group-hover:opacity-100 p-1 rounded-md text-zinc-500 hover:text-red-400 hover:bg-zinc-700/50 transition-all"
-            title="Delete chat"
+            title="Hapus obrolan"
           >
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -274,7 +274,7 @@ class AIChatApp {
   createNewSession() {
     if (this.isGenerating) return;
     this.currentSessionId = null;
-    this.chatTitle.textContent = "New Chat";
+    this.chatTitle.textContent = "Obrolan Baru";
     this.messagesFeed.innerHTML = "";
     this.emptyState.classList.remove("hidden");
     this.renderSessionsList();
@@ -417,12 +417,12 @@ class AIChatApp {
       if (err.name === "AbortError") {
         assistantBubble.innerHTML =
           marked.parse(accumulatedText) +
-          '\n\n<span class="text-xs text-zinc-500 italic block mt-2">[Generation stopped by user]</span>';
+          '\n\n<span class="text-xs text-zinc-500 italic block mt-2">[Respon dihentikan oleh pengguna]</span>';
       } else {
         console.error("Streaming error:", err);
         assistantBubble.innerHTML =
           marked.parse(accumulatedText) +
-          `\n\n<div class="p-3 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm"><strong>Stream Error:</strong> ${this.escapeHtml(
+          `\n\n<div class="p-3 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm"><strong>Kesalahan Streaming:</strong> ${this.escapeHtml(
             err.message
           )}</div>`;
       }
@@ -445,13 +445,13 @@ class AIChatApp {
     if (generating) {
       this.sendIcon.classList.add("hidden");
       this.stopIcon.classList.remove("hidden");
-      this.sendBtn.setAttribute("title", "Stop generating");
+      this.sendBtn.setAttribute("title", "Hentikan pembuatan respon");
       this.sendBtn.classList.add("bg-red-600", "hover:bg-red-500");
       this.sendBtn.classList.remove("bg-sky-500", "hover:bg-sky-400");
     } else {
       this.sendIcon.classList.remove("hidden");
       this.stopIcon.classList.add("hidden");
-      this.sendBtn.setAttribute("title", "Send message");
+      this.sendBtn.setAttribute("title", "Kirim pesan");
       this.sendBtn.classList.remove("bg-red-600", "hover:bg-red-500");
       this.sendBtn.classList.add("bg-sky-500", "hover:bg-sky-400");
     }
@@ -491,7 +491,7 @@ class AIChatApp {
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
           </svg>
-          <span class="copy-label">Copy</span>
+          <span class="copy-label">Salin</span>
         </button>
       `;
 
@@ -504,10 +504,10 @@ class AIChatApp {
         const textToCopy = codeEl.textContent;
         navigator.clipboard.writeText(textToCopy).then(() => {
           copyBtn.classList.add("copied");
-          copyBtn.querySelector(".copy-label").textContent = "Copied!";
+          copyBtn.querySelector(".copy-label").textContent = "Tersalin!";
           setTimeout(() => {
             copyBtn.classList.remove("copied");
-            copyBtn.querySelector(".copy-label").textContent = "Copy";
+            copyBtn.querySelector(".copy-label").textContent = "Salin";
           }, 2000);
         });
       });

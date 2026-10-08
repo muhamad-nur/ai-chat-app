@@ -46,7 +46,7 @@ def get_sessions(db: Session = Depends(get_db)):
 @router.post("", response_model=SessionResponse, status_code=status.HTTP_201_CREATED)
 def create_session(data: SessionCreate = None, db: Session = Depends(get_db)):
     """Create a new chat session."""
-    title = data.title if (data and data.title) else "New Chat"
+    title = data.title if (data and data.title) else "Obrolan Baru"
     new_session = SessionModel(title=title)
     db.add(new_session)
     db.commit()
