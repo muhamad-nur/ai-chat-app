@@ -468,14 +468,14 @@ class AIChatApp {
       this.sendIcon.classList.add("hidden");
       this.stopIcon.classList.remove("hidden");
       this.sendBtn.setAttribute("title", "Hentikan pembuatan respon");
-      this.sendBtn.classList.add("bg-red-600", "hover:bg-red-500");
-      this.sendBtn.classList.remove("bg-sky-500", "hover:bg-sky-400");
+      this.sendBtn.classList.add("bg-red-600", "hover:bg-red-500", "text-white");
+      this.sendBtn.classList.remove("bg-yellow-400", "hover:bg-yellow-300", "text-zinc-950", "bg-sky-500", "hover:bg-sky-400");
     } else {
       this.sendIcon.classList.remove("hidden");
       this.stopIcon.classList.add("hidden");
       this.sendBtn.setAttribute("title", "Kirim pesan");
-      this.sendBtn.classList.remove("bg-red-600", "hover:bg-red-500");
-      this.sendBtn.classList.add("bg-sky-500", "hover:bg-sky-400");
+      this.sendBtn.classList.remove("bg-red-600", "hover:bg-red-500", "text-white");
+      this.sendBtn.classList.add("bg-yellow-400", "hover:bg-yellow-300", "text-zinc-950");
     }
   }
 
